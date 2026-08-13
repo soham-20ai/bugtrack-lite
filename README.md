@@ -1,5 +1,7 @@
 # BugTrack Lite
 
+[![CI Tests](https://github.com/soham-20ai/bugtrack-lite/actions/workflows/tests.yml/badge.svg)](https://github.com/soham-20ai/bugtrack-lite/actions/workflows/tests.yml)
+
 BugTrack Lite is a small issue-tracking web application created as a portfolio project to demonstrate JavaScript fundamentals, REST APIs, Git, and automated software testing.
 
 ## Features
