@@ -39,9 +39,9 @@ app.get("/api/health", (req, res) => {
 });
 
 if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`BugTrack Lite running at http://localhost:${PORT}`);
-  });
+    app.listen(PORT, "0.0.0.0", () => {
+        console.log(`BugTrack Lite running on port ${PORT}`);
+    });
 }
 
 module.exports = app;
