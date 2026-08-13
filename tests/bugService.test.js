@@ -1,3 +1,6 @@
+jest.mock("../src/notificationService", () => ({
+  notifyBugCreated: jest.fn()
+}));
 const {
   createBug,
   updateBug,
@@ -6,7 +9,10 @@ const {
   resetBugs
 } = require("../src/bugService");
 
-beforeEach(() => resetBugs());
+beforeEach(() => {
+  resetBugs();
+  jest.clearAllMocks();
+});
 
 describe("Bug service - unit tests", () => {
   test("creates a valid bug", () => {
@@ -22,6 +28,20 @@ describe("Bug service - unit tests", () => {
     expect(bug.title).toBe("Broken search");
     expect(bug.priority).toBe("High");
   });
+  test("notifies when a bug is created", () => {
+  const { notifyBugCreated } = require("../src/notificationService");
+
+  const bug = createBug({
+    title: "Payment failure",
+    description: "Payment button does not work",
+    priority: "Critical",
+    status: "Open",
+    assignee: "Soham"
+  });
+
+  expect(notifyBugCreated).toHaveBeenCalledTimes(1);
+  expect(notifyBugCreated).toHaveBeenCalledWith(bug);
+});
 
   test("rejects a bug without a title", () => {
     expect(() => createBug({

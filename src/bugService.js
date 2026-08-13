@@ -1,3 +1,4 @@
+const { notifyBugCreated } = require("./notificationService");
 let nextId = 4;
 
 let bugs = [
@@ -54,6 +55,7 @@ function createBug(data) {
   };
 
   bugs.unshift(bug);
+  notifyBugCreated(bug);
   return bug;
 }
 
