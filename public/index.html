@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BugTrack Lite — QA Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">B</div>
+        <div><strong>BugTrack</strong><span>QA Workspace</span></div>
+      </div>
+
+      <nav>
+        <button class="nav-item active" data-view="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-item" data-view="issues"><span>◉</span> Issues</button>
+        <button class="nav-item" data-view="testing"><span>✓</span> Test Suites</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="ci-card">
+          <div class="ci-dot"></div>
+          <div><strong>CI Pipeline</strong><span>All checks passing</span></div>
+        </div>
+        <p class="version">BugTrack Lite v1.0</p>
+      </div>
+    </aside>
+
+    <div class="main-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">SOFTWARE QUALITY</p>
+          <h1 id="pageTitle">QA Dashboard</h1>
+        </div>
+        <div class="top-actions">
+          <div class="health"><span></span> System healthy</div>
+          <button id="newBugBtn" class="primary">+ Report Bug</button>
+        </div>
+      </header>
+
+      <main class="content">
+        <section id="dashboardView" class="view">
+          <div class="welcome">
+            <div>
+              <p class="eyebrow">OVERVIEW</p>
+              <h2>Ship with confidence.</h2>
+              <p>Monitor issues and automated quality checks from one workspace.</p>
+            </div>
+            <div class="date-chip" id="today"></div>
+          </div>
+
+          <section class="stats" id="stats"></section>
+
+          <div class="grid-2">
+            <section class="panel">
+              <div class="panel-head">
+                <div><p class="eyebrow">QUALITY SIGNAL</p><h3>Issue health</h3></div>
+                <span class="mini-label">Live</span>
+              </div>
+              <div class="health-bars" id="healthBars"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <div><p class="eyebrow">AUTOMATION</p><h3>Test suites</h3></div>
+                <span class="passed-pill">11 / 11 passed</span>
+              </div>
+              <div class="test-summary">
+                <div class="ring"><strong>100%</strong><span>Pass rate</span></div>
+                <div class="test-list">
+                  <div><span>✓</span> Unit tests <b>6 passed</b></div>
+                  <div><span>✓</span> Integration tests <b>4 passed</b></div>
+                  <div><span>✓</span> E2E tests <b>1 passed</b></div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div><p class="eyebrow">RECENT ACTIVITY</p><h3>Latest issues</h3></div>
+              <button class="text-btn" data-view-link="issues">View all →</button>
+            </div>
+            <div id="recentIssues"></div>
+          </section>
+        </section>
+
+        <section id="issuesView" class="view hidden">
+          <div class="section-heading">
+            <div><p class="eyebrow">ISSUE MANAGEMENT</p><h2>All issues</h2><p>Track, prioritize and resolve application bugs.</p></div>
+            <button id="newBugBtn2" class="primary">+ Report Bug</button>
+          </div>
+          <section class="panel">
+            <div class="toolbar">
+              <div class="search-wrap">⌕<input id="search" type="search" placeholder="Search issues, descriptions or assignees..."></div>
+              <select id="statusFilter"><option>All</option><option>Open</option><option>In Progress</option><option>Resolved</option></select>
+              <select id="priorityFilter"><option>All</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select>
+            </div>
+            <div id="bugList" class="bug-list"></div>
+          </section>
+        </section>
+
+        <section id="testingView" class="view hidden">
+          <div class="section-heading">
+            <div><p class="eyebrow">AUTOMATED QUALITY</p><h2>Test suites</h2><p>Automated checks protecting the BugTrack application.</p></div>
+            <div class="passed-pill large">● All tests passing</div>
+          </div>
+          <div class="test-cards">
+            <article class="test-card"><div class="test-icon">UT</div><div><span class="type">UNIT</span><h3>Bug service tests</h3><p>Validation, creation, updates, filtering and deletion.</p></div><strong>6 / 6</strong></article>
+            <article class="test-card"><div class="test-icon">API</div><div><span class="type">INTEGRATION</span><h3>API tests</h3><p>REST endpoints validated through HTTP requests.</p></div><strong>4 / 4</strong></article>
+            <article class="test-card"><div class="test-icon">E2E</div><div><span class="type">END-TO-END</span><h3>User workflow test</h3><p>Real browser flow from reporting a bug to verification.</p></div><strong>1 / 1</strong></article>
+          </div>
+          <section class="panel test-method">
+            <p class="eyebrow">TESTING STRATEGY</p>
+            <h3>Confidence at every layer</h3>
+            <div class="strategy"><span>01</span><div><b>Unit</b><p>Small functions are tested in isolation.</p></div></div>
+            <div class="strategy"><span>02</span><div><b>Integration</b><p>API routes and service logic are verified together.</p></div></div>
+            <div class="strategy"><span>03</span><div><b>End-to-End</b><p>A browser simulates a real user journey.</p></div></div>
+          </section>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <button id="closeModal" class="close">×</button>
+      <p class="eyebrow">NEW ISSUE</p>
+      <h2>Report a bug</h2>
+      <p class="modal-sub">Capture enough detail for the team to reproduce and resolve the issue.</p>
+      <form id="bugForm">
+        <label>Title <input id="title" required maxlength="100" placeholder="e.g. Checkout button crashes"></label>
+        <label>Description <textarea id="description" rows="4" placeholder="Describe what happened..."></textarea></label>
+        <div class="form-grid">
+          <label>Priority<select id="priority"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></label>
+          <label>Status<select id="status"><option>Open</option><option>In Progress</option><option>Resolved</option></select></label>
+        </div>
+        <label>Assignee <input id="assignee" required placeholder="Developer or QA owner"></label>
+        <button class="primary full" type="submit">Create Issue</button>
+        <p id="formError" class="error"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

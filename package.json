@@ -1,0 +1,21 @@
+{
+  "name": "bugtrack-lite",
+  "version": "1.0.0",
+  "description": "A lightweight bug tracking system built to demonstrate JavaScript, REST APIs, and automated testing.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "jest --runInBand --testMatch=\"**/tests/**/*.test.js\"",
+    "test:watch": "jest --watch",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "jest": "^30.0.5",
+    "supertest": "^7.1.4"
+  }
+}
